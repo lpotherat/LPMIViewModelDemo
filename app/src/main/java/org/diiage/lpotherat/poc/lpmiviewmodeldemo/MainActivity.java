@@ -25,11 +25,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Initialisation de la base de données.
+        //Note : Ce n'est pas le meilleur endroit pour le faire, le mieux
+        //serait d'utiliser Dagger2 pour injecter la dépendance.
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "operations.sqlite").build();
 
 
-        /*Executors.newSingleThreadExecutor().execute(() -> {
+        /*
+        // Code d'initialisation des données, ne doit être executé qu'une seule fois.
+        Executors.newSingleThreadExecutor().execute(() -> {
             db.operationDao().insert(new Operation(0,1,1));
             db.operationDao().insert(new Operation(0,2,2));
             db.operationDao().insert(new Operation(0,3,3));
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
 
 
+        
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
